@@ -4,4 +4,8 @@ g = Graph()
 
 g.load_from_file("edges")
 
-print(g.all_shortest_path_length())
+#print(g.all_shortest_path_length())
+
+print(g.closeness_centrality('74'))
+
+
