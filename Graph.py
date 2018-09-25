@@ -1,5 +1,4 @@
 import os
-import pprint
 
 #This graph is a digraph
 class Graph:
@@ -16,11 +15,11 @@ class Graph:
                 v1 = edge[0]
                 v2 = edge[1]
                 #check if nodes are already in the graph
-                if v1 not in self.graph:
+                if v1 not in self.graph.keys():
                     self.graph[v1] = list()
-                if v2 not in self.graph:
+                if v2 not in self.graph.keys():
                     self.graph[v2] = list();
-                #add edge to the graph, if not yet included
+                #add neighbor to the node, if not yet included
                 if v2 not in self.graph[v1]:
                     self.graph[v1].append(v2)
                 if v1 not in self.graph[v2]:
@@ -34,22 +33,20 @@ class Graph:
                 for v2 in self.graph.keys():
                     dist[v1][v2] = float("inf")
                     if v1 == v2:
-                        dist[v1][v2] = 0.0
+                        dist[v1][v1] = 0.0
             for v, neighbors in self.graph.items():
                 for n in neighbors:
                     dist[v][n] = 1.0
-            for k in self.graph:
-                for i in self.graph:
-                    for j in self.graph:
-                        if dist[i][j] > dist[i][k] + dist[k][j]:
-                            dist[i][j] = dist[i][k] + dist[k][j]
+            for k in self.graph.keys():
+                for i in self.graph.keys():
+                    for j in self.graph.keys():
+                        dist[i][j] = min(dist[i][j],dist[i][k] + dist[k][j])
         else:
             dist = None
         return dist
 
     def closeness_centrality(self, node):
-        if self.dist is None:
-            self.dist = self.all_shortest_path_length()
-        print(self.dist.keys())
+        self.dist = self.all_shortest_path_length()
         if node in self.dist.keys():
-            return 1.0/sum(i for i in self.dist[node].values() if i != 0)
+            n = len(self.dist.keys())-1
+            return n/sum(i for i in self.dist[node].values())
