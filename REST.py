@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+__author__ = "William Roberto de Paiva"
+__copyright__ = "Copyright 2018, Will's simple graph"
+__credits__ = ["William Roberto de Paiva"]
+__license__ = "MIT"
+__maintainer__ = "William Roberto de Paiva"
+__email__ = "will.unicamp@gmail.com"
+__status__ = "Production"
+
 from flask import Flask, request
 from flask_restful import Resource, Api
 import operator
@@ -23,4 +32,4 @@ api.add_resource(AddEdge, '/addedge/<node1>/<node2>') # Route_1
 
 if __name__ == '__main__':
     g = Graph()
-    app.run(port='5002')
+    app.run(port='4242')
