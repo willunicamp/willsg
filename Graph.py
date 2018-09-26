@@ -45,8 +45,14 @@ class Graph:
             dist = None
         return dist
 
-    def closeness_centrality(self, node):
+    def closeness_centrality(self, node=None):
         self.dist = self.all_shortest_path_length()
+        n = len(self.dist.keys())-1
+        if node is None:
+            cc_dict = dict()
+            for node in self.graph.keys():
+                cc_dict[node] = n/sum(i for i in self.dist[node].values())
+            return cc_dict
         if node in self.dist.keys():
             n = len(self.dist.keys())-1
             return n/sum(i for i in self.dist[node].values())
