@@ -14,16 +14,24 @@ class Graph:
                 edge = line.replace('\n','').split(' ')
                 v1 = edge[0]
                 v2 = edge[1]
-                #check if nodes are already in the graph
-                if v1 not in self.graph.keys():
-                    self.graph[v1] = list()
-                if v2 not in self.graph.keys():
-                    self.graph[v2] = list();
-                #add neighbor to the node, if not yet included
-                if v2 not in self.graph[v1]:
-                    self.graph[v1].append(v2)
-                if v1 not in self.graph[v2]:
-                    self.graph[v2].append(v1)
+
+    def add_edge(self, v1, v2):
+        if None not in (v1,v2):
+            if self.graph == None:
+                self.graph = dict()
+            #check if nodes are already in the graph
+            if v1 not in self.graph.keys():
+                self.graph[v1] = list()
+            if v2 not in self.graph.keys():
+                self.graph[v2] = list();
+            #add neighbor to the node, if not yet included
+            if v2 not in self.graph[v1]:
+                self.graph[v1].append(v2)
+            if v1 not in self.graph[v2]:
+                self.graph[v2].append(v1)
+            return True
+        else:
+            return False
 
     def all_shortest_path_length(self):
         if self.graph is not None:
